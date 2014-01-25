@@ -41,8 +41,8 @@ public class MachineGunFire : Part
 
 	void OnBeat(int count, double time)
 	{
-		if ((count + beatOffset) % MusicEventManager.Instance.countTo == beatCount) Fire(time);
-		else if ((count + beatOffset + secondShotOffset) % MusicEventManager.Instance.countTo == beatCount) Fire(time);
+		if ((count + beatCount) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
+		else if ((count + beatCount + secondShotOffset) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
 	}
 
 	public void Fire(double time)
