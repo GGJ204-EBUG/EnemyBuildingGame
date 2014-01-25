@@ -10,7 +10,7 @@ public class EBG : MonoBehaviour
 		{
 			if (instance == null)
 			{
-				GameObject go = Resources.Load("EBG") as GameObject;
+				GameObject go = GameObject.Instantiate(Resources.Load("EBG")) as GameObject;
 				instance = go.GetComponent<EBG>();
 			}
 			return instance;

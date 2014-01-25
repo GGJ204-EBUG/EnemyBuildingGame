@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour {
 		transform.Translate(Vector3.forward * Time.deltaTime * speed);
 	}
 
-	void OnCollisionEnter(Collision col)
+	void OnTriggerEnter(Collider col)
 	{
 
 		if (!destroyed)
@@ -20,9 +20,9 @@ public class Bullet : MonoBehaviour {
 			destroyed = true;
 
 			GameObject target;
-			if (col.collider.attachedRigidbody != null) 
+			if (col.attachedRigidbody != null) 
 			{
-				target = col.collider.attachedRigidbody.gameObject;
+				target = col.attachedRigidbody.gameObject;
 			}
 			else
 			{
@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour {
 			Damage dam = new Damage();
 			dam.amount = damage;
 			dam.source = this;
-			dam.targetCollider = col.collider;
+			dam.targetCollider = col;
 
 			DamageReceiver receiver = target.GetComponent<DamageReceiver>();
 			if (receiver != null)

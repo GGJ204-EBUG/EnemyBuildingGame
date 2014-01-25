@@ -4,55 +4,53 @@ using System.Collections;
 public class Player : MonoBehaviour 
 {
 	public bool isPlayerOne = true;
-	public Transform robot;
-	public float rotateSpeed = 10;
-	public float acceleration = 10;
-	
-	private Rigidbody rigid;
-	
+	public Robot robot;
+
+	bool isTouchPlatform;
+
 	void Awake()
 	{
-		this.rigid = robot.rigidbody;
-	}
-	
-	void Start ()
-	{
-	
-	}
-	
-	void Update ()
-	{
-		if (robot != null)
+		if (!Application.isEditor &&
+		    (
+			Application.platform == RuntimePlatform.Android ||
+		    Application.platform == RuntimePlatform.IPhonePlayer ||
+		    Application.platform == RuntimePlatform.WP8Player)
+		    )
 		{
-			float input;
-			if (isPlayerOne)
-			{
-				input = Input.GetAxis("Player One Turn");
-			}
-			else
-			{
-				input = Input.GetAxis("Player Two Turn");
-			}
-			robot.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * input);
+			isTouchPlatform = true;
+		}
+		else
+		{
+			isTouchPlatform = false;
 		}
 	}
-	
-	void FixedUpdate()
-	{
-		if (robot != null)
-		{
-			float input;
-			if (isPlayerOne)
-			{
-				input = Input.GetAxis("Player One Forward");
-			}
-			else
-			{
-				input = Input.GetAxis("Player Two Forward");
-			}
-			
-			rigid.AddRelativeForce(Vector3.forward * acceleration * input);
-		}
 
+	private Vector2 input;
+
+	void Update()
+	{
+		if (robot != null && !isTouchPlatform)
+		{
+			if (isPlayerOne)
+			{
+				input.x = Input.GetAxis("Player One Turn");
+				input.y = Input.GetAxis("Player One Forward");
+			}
+			else
+			{
+				input.x = Input.GetAxis("Player Two Turn");
+				input.y = Input.GetAxis("Player Two Forward");
+			}
+
+			if (Mathf.Approximately(input.magnitude, 0))
+			{
+				robot.AccelerateTowards(0);
+			}
+			else
+			{
+				robot.TurnTowards(Quaternion.LookRotation(new Vector3(input.x, 0, input.y)).eulerAngles.y);
+				robot.AccelerateTowards(1);
+			}
+		}
 	}
 }

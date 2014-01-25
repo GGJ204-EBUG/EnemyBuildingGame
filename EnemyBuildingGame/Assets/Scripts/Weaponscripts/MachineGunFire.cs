@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Weapon : Part
+public class MachineGunFire : Part
 {
 	public float ammoDamage;
 	public float ammoSpeed;
