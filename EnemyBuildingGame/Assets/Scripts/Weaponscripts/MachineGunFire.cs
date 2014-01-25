@@ -12,25 +12,55 @@ public class MachineGunFire : Part
 	public float coolDown = 0.25f;
 	private float lastFired;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		Fire ();
+	public int beatOffset = 0;
+	public int secondShotOffset = 2;
+	public int beatCount = 8;
+
+	private AudioSource audioSource;
+
+	void Awake()
+	{
+		audioSource = audio;
+
+		if (audioSource != null && transform.position.x < 0) 
+		{
+			beatOffset = 2;
+			audioSource.pitch = 1.2f;
+		}
 	}
 
-	public void Fire()
+	void OnEnable()
 	{
-		if (Time.time > lastFired + coolDown)
+		MusicEventManager.OnBeat += OnBeat;
+	}
+
+	void OnDisable()
+	{
+		MusicEventManager.OnBeat -= OnBeat;
+	}
+
+	void OnBeat(int count, double time)
+	{
+		if ((count + beatOffset) % MusicEventManager.Instance.countTo == beatCount) Fire(time);
+		else if ((count + beatOffset + secondShotOffset) % MusicEventManager.Instance.countTo == beatCount) Fire(time);
+	}
+
+	public void Fire(double time)
+	{
+		if (audioSource != null)
+		{
+			audioSource.PlayScheduled(time);
+		}
+
+		if (ammoPrefab != null)
 		{
 			GameObject go = Instantiate(ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation) as GameObject;
 			Bullet bullet = go.GetComponent<Bullet>();
 			bullet.speed = ammoSpeed;
 			bullet.damage = ammoDamage;
-			lastFired = Time.time;
+			lastFired = Time.time;	
 		}
+
+
 	}
 }
