@@ -23,6 +23,7 @@ public class Plasma : MonoBehaviour {
 			Destroy(gameObject);
 
 		transform.Translate(Vector3.forward * Time.deltaTime * speed);
+		transform.localScale *= 1.015f;
 
 	}
 
@@ -39,14 +40,14 @@ public class Plasma : MonoBehaviour {
 			target = col.gameObject;
 		}	
 		Damage dam = new Damage();
-		dam.amount = damage;
+		dam.amount = damage/((Time.time/timecreated)+1.0f);
 		dam.source = this;
 		dam.targetCollider = col;
 		
 		DamageReceiver receiver = target.GetComponent<DamageReceiver>();
 		if (receiver != null)
 		{
-			Debug.Log("bum");
+			//Debug.Log("bum");
 			receiver.TakeDamage(dam);
 		}
 
