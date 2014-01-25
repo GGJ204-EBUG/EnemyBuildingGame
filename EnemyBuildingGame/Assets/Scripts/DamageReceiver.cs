@@ -7,7 +7,6 @@ public class DamageReceiver : MonoBehaviour
 	public GameObject deathEffect;
 	private float damage;
 
-
 	public void TakeDamage(Damage newDamage)
 	{
 		TakeDamage(newDamage.amount);

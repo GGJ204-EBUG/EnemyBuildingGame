@@ -26,7 +26,6 @@ public class BattleManager : MonoBehaviour {
 		if (music != null) AudioManager.Instance.PlayMusic(music, true);
 	}
 
-
 	void Update()
 	{
 		if (EBG.CurrentState == EBG.GameState.Playing)
