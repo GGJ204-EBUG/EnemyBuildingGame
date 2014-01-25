@@ -14,9 +14,8 @@ public class PartButton : MonoBehaviour, Button {
 	
 	}
 
-	void Button.ButtonPressed ()
+	public void ButtonPressed ()
 	{
-
 		Stack<Part> stack = new Stack<Part>();
 		stack.Push (robot.part);
 		Debug.Log (robot.part.Slots.Length);
@@ -25,13 +24,10 @@ public class PartButton : MonoBehaviour, Button {
 			foreach(Slot slot in temp.Slots){
 				Debug.Log (slot + " " + slot.Attachment);
 				if(slot.CanSet(part) && slot.Attachment == null){
-					/*
-					if(slot.Attachment != null)
-						Destroy(slot.Attachment);
-					*/
-					
-					Debug.Log (slot + "asd " + slot.Attachment);
 					slot.Attachment = Instantiate (part) as Part;
+					foreach(MonoBehaviour script in slot.Attachment.GetComponents<MonoBehaviour>()){
+						script.enabled = true;
+					}
 					slot.Attachment.transform.parent = slot.transform;
 					slot.Attachment.transform.localPosition = Vector3.zero;
 					slot.Attachment.transform.localRotation = Quaternion.identity;
