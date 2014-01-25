@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour 
 {
+	public string PlayerName;
+
 	public bool isPlayerOne = true;
 	public Robot robot;
 
