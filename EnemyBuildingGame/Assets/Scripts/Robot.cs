@@ -36,25 +36,17 @@ public class Robot : MonoBehaviour {
 	{
 		float dot = Vector3.Dot(MoveTarget.forward, transform.forward);
 
-		//if (EBG.P1.robot = this) Debug.Log(MoveTarget.forward + " dot " + transform.forward + " is " + dot);
-
-		if (dot > 0.75f)
+		if (dot > 0.7f)
 		{
-			Debug.Log(dot);
 			CurrentAcceleration = Mathf.MoveTowards(CurrentAcceleration, TargetAcceleration, acceleration * Time.deltaTime);
 			rigidbody.AddRelativeForce(Vector3.forward * CurrentAcceleration);
 		}
-		else if (dot < -0.75f)
+		else if (dot < -0.85f)
 		{
 			Debug.Log(dot);
 			CurrentAcceleration = Mathf.MoveTowards(CurrentAcceleration, TargetAcceleration, acceleration * Time.deltaTime);
 			rigidbody.AddRelativeForce(-Vector3.forward * CurrentAcceleration);
 		}
-
-		// If facing the correct direction, accelerate
-
-			
-		// if facing away from the correct direction, break
 	}
 
 	public void AccelerateTowards(float targetAcceleration)
