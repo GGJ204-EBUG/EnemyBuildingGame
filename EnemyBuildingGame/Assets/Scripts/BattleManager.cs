@@ -7,6 +7,8 @@ public class BattleManager : MonoBehaviour {
 	public Transform player1Start;
 	public Transform player2Start;
 
+	public AudioClip music;
+
 	public Player Winner { get; private set; }
 
 	// Use this for initialization
@@ -20,6 +22,8 @@ public class BattleManager : MonoBehaviour {
 		EBG.P2.robot = go.GetComponent<Robot>();
 
 		EBG.CurrentState = EBG.GameState.Playing;
+
+		if (music != null) AudioManager.Instance.PlayMusic(music, true);
 	}
 
 
