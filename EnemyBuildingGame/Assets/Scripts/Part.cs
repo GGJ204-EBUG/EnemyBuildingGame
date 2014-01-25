@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class Part : MonoBehaviour {
-	abstract public Slot[] Slots{
-		get;
-	}
+public class Part : MonoBehaviour {
+	public Slot[] Slots;
+	public Slot.PartType type;
 }
