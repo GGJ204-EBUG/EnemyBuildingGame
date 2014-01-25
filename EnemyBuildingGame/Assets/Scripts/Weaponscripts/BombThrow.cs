@@ -8,6 +8,7 @@ public class BombThrow : MonoBehaviour {
 	public float fuse;
 	public float expRadius;
 	public float expDamage;
+	public float expTime;
 
 	public float coolDown;
 	private float lastFired;
@@ -27,8 +28,14 @@ public class BombThrow : MonoBehaviour {
 	}
 
 	void Throw () {
-		GameObject go = Instantiate(ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation) as GameObject;
-
-		
+		if(ammoPrefab != null) {
+			GameObject go = Instantiate(ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation) as GameObject;
+			Bomb bomb = go.GetComponent<Bomb>();
+			bomb.fuseLength = fuse;
+			bomb.damage = expDamage;
+			bomb.damageradius = expRadius;
+			bomb.damageTime = expTime;
+		}
+			
 	}
 }
