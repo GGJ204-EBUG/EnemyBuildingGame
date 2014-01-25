@@ -36,7 +36,6 @@ public class Bullet : MonoBehaviour {
 			DamageReceiver receiver = target.GetComponent<DamageReceiver>();
 			if (receiver != null)
 			{
-				Debug.Log("bum");
 				receiver.TakeDamage(dam);
 			}
 
