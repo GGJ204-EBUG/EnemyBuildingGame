@@ -4,7 +4,7 @@ using System.Collections;
 public class Lazer : MonoBehaviour {
 	
 	public float damage=1;
-	public float lifetime=3.0f;
+	public float lifetime=3.0f;	
 	public float timecreated;
 	public Vector3 origin;
 	public Transform loc;
