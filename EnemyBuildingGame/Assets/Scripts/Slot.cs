@@ -12,8 +12,10 @@ public class Slot{
 	private Type type;
 	Part part{
 		set{
-			if(value.GetType().Equals(type)){
+			if(type.IsAssignableFrom(value.GetType())){
 				part = value;
+			}else{
+				throw new Exception("Mitä jäbä duunaa?");
 			}
 		}
 		get{
