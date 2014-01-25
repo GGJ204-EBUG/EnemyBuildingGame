@@ -8,11 +8,15 @@ public class MoveGizmo : MonoBehaviour
 	public Transform targetMoveGizmo;
 	public Transform realMoveGizmo;
 
+	[HideInInspector]
+	public bool isReversing;
+
 	private Player p;
 
 	private float targetAcceleration;
 	private float targetDirection;
-	
+
+
 	void Awake()
 	{
 		if (Application.platform != RuntimePlatform.Android &&
@@ -37,10 +41,13 @@ public class MoveGizmo : MonoBehaviour
 		if (p != null && p.robot != null)
 		{
 			p.robot.TurnTowards(targetDirection);
-			p.robot.AccelerateTowards(targetAcceleration);
+			if (isReversing) p.robot.AccelerateTowards(- 0.75f * targetAcceleration);
+			else p.robot.AccelerateTowards(targetAcceleration);
 
 			realMoveGizmo.localEulerAngles = Vector3.forward * (360 - p.robot.CurrentHeading);
 		}
+
+		isReversing = false;
 	}
 
 	void OnTouch(Vector2 position)
