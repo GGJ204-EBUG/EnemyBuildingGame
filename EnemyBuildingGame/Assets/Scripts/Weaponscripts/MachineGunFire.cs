@@ -12,14 +12,6 @@ public class MachineGunFire : Part
 	public float coolDown = 0.25f;
 	private float lastFired;
 
-
-	private Slot[] slots = {};
-	override public Slot[] Slots {
-		get {
-			return slots;
-		}
-	}
-
 	// Use this for initialization
 	void Start () {
 	
