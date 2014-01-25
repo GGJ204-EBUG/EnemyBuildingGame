@@ -4,55 +4,32 @@ using System.Collections;
 public class Player : MonoBehaviour 
 {
 	public bool isPlayerOne = true;
-	public Transform robot;
-	public float rotateSpeed = 10;
-	public float acceleration = 10;
+	public Robot robot;
 	
-	private Rigidbody rigid;
-	
-	void Awake()
-	{
-		this.rigid = robot.rigidbody;
-	}
-	
-	void Start ()
-	{
-	
-	}
-	
-	void Update ()
+	void Update()
 	{
 		if (robot != null)
 		{
-			float input;
+			Vector2 input;
 			if (isPlayerOne)
 			{
-				input = Input.GetAxis("Player One Turn");
+				input.x = Input.GetAxis("Player One Turn");
+				input.y = Input.GetAxis("Player One Forward");
 			}
 			else
 			{
-				input = Input.GetAxis("Player Two Turn");
+				input.x = Input.GetAxis("Player Two Turn");
+				input.y = Input.GetAxis("Player Two Forward");
 			}
-			robot.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * input);
-		}
-	}
-	
-	void FixedUpdate()
-	{
-		if (robot != null)
-		{
-			float input;
-			if (isPlayerOne)
+			if (Mathf.Approximately(input.magnitude, 0))
 			{
-				input = Input.GetAxis("Player One Forward");
+				robot.AccelerateTowards(0);
 			}
 			else
 			{
-				input = Input.GetAxis("Player Two Forward");
+				robot.TurnTowards(Quaternion.LookRotation(new Vector3(input.x, 0, input.y)).eulerAngles.y);
+				robot.AccelerateTowards(robot.acceleration);
 			}
-			
-			rigid.AddRelativeForce(Vector3.forward * acceleration * input);
 		}
-
 	}
 }
