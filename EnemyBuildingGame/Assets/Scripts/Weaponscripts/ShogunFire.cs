@@ -19,14 +19,6 @@ public class ShogunFire : Part
 	public float coolDown = 2.0f;
 	private float lastFired;
 	
-	
-	private Slot[] slots = {};
-	override public Slot[] Slots {
-		get {
-			return slots;
-		}
-	}
-	
 	// Use this for initialization
 	void Start () {
 		line = gameObject.GetComponent<LineRenderer>();
