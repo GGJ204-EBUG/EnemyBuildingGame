@@ -27,6 +27,7 @@ public class Robot : MonoBehaviour {
 	{
 		if (CurrentHeading > TargetHeading + 180) CurrentHeading -= 360;
 		else if (CurrentHeading < TargetHeading - 180) CurrentHeading += 360;
+
 		CurrentHeading = Mathf.MoveTowards(CurrentHeading, TargetHeading, rotateSpeed * Time.deltaTime);
 		Quaternion toAngle = Quaternion.AngleAxis(CurrentHeading, Vector3.up);
 		transform.localRotation = toAngle;
@@ -50,14 +51,12 @@ public class Robot : MonoBehaviour {
 
 	public void AccelerateTowards(float targetAcceleration)
 	{
-		Debug.Log("targetAcceleration: " + targetAcceleration);
 		targetAcceleration = Mathf.Clamp(targetAcceleration, -0.5f * acceleration, acceleration);
 		TargetAcceleration = targetAcceleration * acceleration;
 	}
 
 	public void TurnTowards(float targetHeading)
 	{
-		Debug.Log("TurnTowards: " + targetHeading);
 		this.TargetHeading = targetHeading;
 		MoveTarget.eulerAngles = Vector3.up * TargetHeading;
 	}

@@ -12,6 +12,17 @@ public class MoveGizmo : MonoBehaviour
 
 	private float targetAcceleration;
 	private float targetDirection;
+	
+	void Awake()
+	{
+		if (Application.platform != RuntimePlatform.Android &&
+			Application.platform != RuntimePlatform.IPhonePlayer &&
+			Application.platform != RuntimePlatform.WP8Player
+		    )
+		{
+			Destroy(gameObject);
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
