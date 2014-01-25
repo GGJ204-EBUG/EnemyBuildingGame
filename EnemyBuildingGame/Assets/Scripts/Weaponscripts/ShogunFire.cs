@@ -41,7 +41,7 @@ public class ShogunFire : Part
 	
 	public void Fire()
 	{
-		if (Time.time > lastFired + coolDown)
+	/*	if (Time.time > lastFired + coolDown)
 		{
 			for (int n=1; n<amountOfLazers; n++) 
 			{
@@ -57,6 +57,6 @@ public class ShogunFire : Part
 
 			}
 			lastFired = Time.time;
-		}
+		}*/
 	}
 }
