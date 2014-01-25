@@ -15,6 +15,7 @@ public class DamageReceiver : MonoBehaviour
 
 	public void TakeDamage(float amount)
 	{
+		if (EBG.CurrentState != EBG.GameState.Playing) return;
 		damage += amount;
 		if (damage >= health)
 		{
