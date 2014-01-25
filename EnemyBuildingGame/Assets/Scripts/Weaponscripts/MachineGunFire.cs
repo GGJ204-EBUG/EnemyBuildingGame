@@ -22,8 +22,12 @@ public class MachineGunFire : Part
 	void Awake()
 	{
 		audioSource = audio;
+		if (transform.position.x < 0) 
+		{
+			beatOffset = 2;
+			audioSource.pitch = 1.2f;
+		}
 	}
-
 
 	void OnEnable()
 	{
@@ -50,8 +54,8 @@ public class MachineGunFire : Part
 				audioSource = gameObject.AddComponent<AudioSource>();
 			}
 			audioSource.clip = fireSound;
-			Debug.Log(time);
-			audioSource.PlayDelayed((float)time);
+			//Debug.Log(time);
+			audioSource.PlayScheduled(time);
 		}
 
 		if (ammoPrefab != null)

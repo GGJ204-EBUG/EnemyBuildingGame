@@ -5,6 +5,7 @@ public class DamageReceiver : MonoBehaviour
 {
 	public float health;
 	public GameObject deathEffect;
+
 	private float damage;
 
 	public void TakeDamage(Damage newDamage)
@@ -26,6 +27,7 @@ public class DamageReceiver : MonoBehaviour
 		if (deathEffect != null)
 		{
 			GameObject go = Instantiate(deathEffect, transform.position, Quaternion.identity) as GameObject;
+			if (go.audio != null) go.audio.PlayScheduled(MusicEventManager.Instance.GetNext());
 			Destroy(go, 10);
 		}
 		Destroy(gameObject);

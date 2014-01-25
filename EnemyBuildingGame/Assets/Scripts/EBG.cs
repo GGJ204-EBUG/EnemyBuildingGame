@@ -62,6 +62,7 @@ public class EBG : MonoBehaviour
 	void Awake()
 	{
 		DontDestroyOnLoad(gameObject);
+		Application.targetFrameRate = 60;
 	}
 
 	#region static convenience methods
