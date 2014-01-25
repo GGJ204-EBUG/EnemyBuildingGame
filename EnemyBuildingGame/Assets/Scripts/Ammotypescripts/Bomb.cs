@@ -15,7 +15,7 @@ public class Bomb : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Time.time>(throwtime+fuselength) {
+		if(Time.time>(throwtime+fuselength)) {
 
 			Debug.Log("Boom!!");
 			//Create explosion

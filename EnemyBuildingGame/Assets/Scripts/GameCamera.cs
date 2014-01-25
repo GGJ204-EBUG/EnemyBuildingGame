@@ -17,7 +17,7 @@ public class GameCamera : MonoBehaviour {
 
 	public static void Shake(float amount)
 	{
-		Instance.ShakeCamera(amount);
+		if (Instance != null) Instance.ShakeCamera(amount);
 	}
 
 	public void ShakeCamera(float amount)

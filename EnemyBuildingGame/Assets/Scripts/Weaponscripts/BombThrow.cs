@@ -27,7 +27,7 @@ public class BombThrow : MonoBehaviour {
 	}
 
 	void Throw () {
-		Instantiate (ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation) as gameObject;
+		Instantiate (ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation);
 
 		
 	}
