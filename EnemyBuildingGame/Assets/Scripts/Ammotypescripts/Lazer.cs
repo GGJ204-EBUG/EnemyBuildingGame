@@ -23,7 +23,7 @@ public class Lazer : MonoBehaviour {
 
 		//Transform temp = loc;
 
-		float offset = Random.Range (-2.0f,2.0f);
+		float offset = Random.Range (-15.0f,15.0f);
 		loc.Rotate(Vector3.up*offset, Space.World);
 
 		Ray ray = new Ray(loc.position, loc.forward);
