@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Lazer : MonoBehaviour {
 	
-	public float damage=1;
-	public float lifetime=3.0f;	
+	public float damage;
+	public float lifetime = 0.2f;	
 	public float timecreated;
 	public Vector3 origin;
 	public Transform loc;
@@ -15,16 +15,48 @@ public class Lazer : MonoBehaviour {
 		
 	// Use this for initialization
 	void Start () {
-		
+
+		//Debug.Log("Laser luotu");
+
 		timecreated = Time.time;
 		line = gameObject.GetComponent <LineRenderer>();
 
+		//Transform temp = loc;
+
+		float offset = Random.Range (-2.0f,2.0f);
+		loc.Rotate(Vector3.up*offset, Space.World);
+
 		Ray ray = new Ray(loc.position, loc.forward);
+
 		RaycastHit hit;
-		
-		line.SetPosition(0, origin);
+		if(Physics.Raycast (ray, out hit)) {
+
+		line.SetPosition(0, loc.position);
+		line.SetPosition (1, hit.point);
 		line.enabled = true;
 
+		Damage dam = new Damage();
+		dam.amount = damage;
+		dam.source = this;
+		dam.targetCollider = hit.collider;
+
+			Debug.Log ("Damage! "+dam.amount);
+		if(hit.collider.attachedRigidbody != null) {
+			DamageReceiver receiver = hit.collider.attachedRigidbody.GetComponent<DamageReceiver>();
+		if (receiver != null)
+		{
+			//Debug.Log("bum");
+			receiver.TakeDamage(dam);
+		} 
+			}
+		}
+		else {
+			line.SetPosition(0, loc.position);
+			line.SetPosition (1, loc.forward*100);
+			line.enabled = true;
+			
+			//line.enabled = false;
+		}
 
 	}
 	
@@ -32,6 +64,7 @@ public class Lazer : MonoBehaviour {
 	void Update () {
 		if (Time.time > timecreated+lifetime)
 		{
+
 			line.enabled = false;
 			Destroy (gameObject);
 		}

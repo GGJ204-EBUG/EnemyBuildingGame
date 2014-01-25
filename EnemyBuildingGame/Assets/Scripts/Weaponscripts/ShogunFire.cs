@@ -6,31 +6,32 @@ public class ShogunFire : Part
 {
 	// Shogun is like a shotgun, but with more oof. And lasers. Random but plentiful spread.
 
-	public float ammoDamage;
+	public float ammoDamage = 200;
 	public float ammoSpeed;
 	
-	public float ammoActiveTime = 1.0f;
+	public float ammoActiveTime = 0.1f;
 
 	public int amountOfLazers = 10;
-
-	LineRenderer line;
+		
+	//LineRenderer line;
 
 	public Lazer ammoPrefab;
 	public Transform ammoSpawnPos;
-	public float coolDown = 2.0f;
+	public float coolDown = 1.0f;
 	private float lastFired;
 	
-	
+	/*
 	private Slot[] slots = {};
 	override public Slot[] Slots {
 		get {
 			return slots;
 		}
 	}
-	
+	*/
+
 	// Use this for initialization
 	void Start () {
-		line = gameObject.GetComponent<LineRenderer>();
+		//line = gameObject.GetComponent<LineRenderer>();
 
 	}
 	
@@ -41,11 +42,11 @@ public class ShogunFire : Part
 	
 	public void Fire()
 	{
-	/*	if (Time.time > lastFired + coolDown)
+		if (Time.time > lastFired + coolDown)
 		{
-			for (int n=1; n<amountOfLazers; n++) 
+			for (int n=1; n<=amountOfLazers; n++) 
 			{
-								
+				Debug.Log("Firing!");				
 				GameObject go = Instantiate(ammoPrefab.gameObject) as GameObject;
 				Lazer bullet = go.GetComponent<Lazer>();
 				bullet.origin = ammoSpawnPos.position;
@@ -54,9 +55,19 @@ public class ShogunFire : Part
 				bullet.lifetime = ammoActiveTime;
 				bullet.loc = ammoSpawnPos;
 
+				/*
+				float offset = Random.Range(-40.0f,40.0f);
+				if(offset>0) {
+					Transform route = ammoSpawnPos.transform;
+					bullet.loc = route.Rotate(Vector3.right*offset);
+				} else {
+					Transform route = ammoSpawnPos.transform;
+					bullet.loc = route.Rotate(Vector3.left*offset);
+				}
+				*/
 
 			}
 			lastFired = Time.time;
-		}*/
+		}
 	}
 }
