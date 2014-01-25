@@ -24,15 +24,6 @@ public class PartButton : MonoBehaviour, Button {
 			foreach(Slot slot in temp.Slots){
 				Debug.Log (slot + " " + slot.Attachment);
 				if(slot.CanSet(part) && slot.Attachment == null){
-<<<<<<< HEAD
-=======
-					/*
-					if(slot.Attachment != null)
-						Destroy(slot.Attachment);
-					*/
-					
-					Debug.Log (slot + "asd " + slot.Attachment);
->>>>>>> 5af8d17ad6cc9e7b9cf80fc478a0f4040bc818dd
 					slot.Attachment = Instantiate (part) as Part;
 					foreach(MonoBehaviour script in slot.Attachment.GetComponents<MonoBehaviour>()){
 						script.enabled = true;
