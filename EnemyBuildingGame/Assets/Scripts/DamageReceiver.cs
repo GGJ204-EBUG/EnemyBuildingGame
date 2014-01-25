@@ -18,7 +18,12 @@ public class DamageReceiver : MonoBehaviour
 		damage += amount;
 		if (damage >= health)
 		{
+			GameCamera.Shake(1);
 			Die();
+		}
+		else
+		{
+			GameCamera.Shake(amount / health);
 		}
 	}
 

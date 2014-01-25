@@ -15,14 +15,14 @@ public class MachineGunFire : Part
 	public int beatOffset = 0;
 	public int secondShotOffset = 2;
 	public int beatCount = 8;
-	public AudioClip fireSound;
 
 	private AudioSource audioSource;
 
 	void Awake()
 	{
 		audioSource = audio;
-		if (transform.position.x < 0) 
+
+		if (audioSource != null && transform.position.x < 0) 
 		{
 			beatOffset = 2;
 			audioSource.pitch = 1.2f;
@@ -47,14 +47,8 @@ public class MachineGunFire : Part
 
 	public void Fire(double time)
 	{
-		if (fireSound != null)
+		if (audioSource != null)
 		{
-			if (audioSource == null)
-			{
-				audioSource = gameObject.AddComponent<AudioSource>();
-			}
-			audioSource.clip = fireSound;
-			//Debug.Log(time);
 			audioSource.PlayScheduled(time);
 		}
 
