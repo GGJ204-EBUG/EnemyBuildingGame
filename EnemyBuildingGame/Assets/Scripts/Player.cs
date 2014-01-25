@@ -23,14 +23,14 @@ public class Player : MonoBehaviour
 		{
 			isTouchPlatform = false;
 		}
-		Debug.Log(isTouchPlatform);
 	}
+
+	private Vector2 input;
 
 	void Update()
 	{
 		if (robot != null && !isTouchPlatform)
 		{
-			Vector2 input;
 			if (isPlayerOne)
 			{
 				input.x = Input.GetAxis("Player One Turn");
@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 				input.x = Input.GetAxis("Player Two Turn");
 				input.y = Input.GetAxis("Player Two Forward");
 			}
+
 			if (Mathf.Approximately(input.magnitude, 0))
 			{
 				robot.AccelerateTowards(0);
