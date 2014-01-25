@@ -43,7 +43,6 @@ public class Robot : MonoBehaviour {
 		}
 		else if (dot < -0.85f)
 		{
-			Debug.Log(dot);
 			CurrentAcceleration = Mathf.MoveTowards(CurrentAcceleration, TargetAcceleration, acceleration * Time.deltaTime);
 			rigidbody.AddRelativeForce(-Vector3.forward * CurrentAcceleration);
 		}
@@ -51,11 +50,14 @@ public class Robot : MonoBehaviour {
 
 	public void AccelerateTowards(float targetAcceleration)
 	{
-		TargetAcceleration = targetAcceleration;
+		Debug.Log("targetAcceleration: " + targetAcceleration);
+		targetAcceleration = Mathf.Clamp(targetAcceleration, -0.5f * acceleration, acceleration);
+		TargetAcceleration = targetAcceleration * acceleration;
 	}
 
 	public void TurnTowards(float targetHeading)
 	{
+		Debug.Log("TurnTowards: " + targetHeading);
 		this.TargetHeading = targetHeading;
 		MoveTarget.eulerAngles = Vector3.up * TargetHeading;
 	}

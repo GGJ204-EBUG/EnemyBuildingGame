@@ -5,10 +5,30 @@ public class Player : MonoBehaviour
 {
 	public bool isPlayerOne = true;
 	public Robot robot;
-	
+
+	bool isTouchPlatform;
+
+	void Awake()
+	{
+		if (!Application.isEditor &&
+		    (
+			Application.platform == RuntimePlatform.Android ||
+		    Application.platform == RuntimePlatform.IPhonePlayer ||
+		    Application.platform == RuntimePlatform.WP8Player)
+		    )
+		{
+			isTouchPlatform = true;
+		}
+		else
+		{
+			isTouchPlatform = false;
+		}
+		Debug.Log(isTouchPlatform);
+	}
+
 	void Update()
 	{
-		if (robot != null)
+		if (robot != null && !isTouchPlatform)
 		{
 			Vector2 input;
 			if (isPlayerOne)
@@ -28,7 +48,7 @@ public class Player : MonoBehaviour
 			else
 			{
 				robot.TurnTowards(Quaternion.LookRotation(new Vector3(input.x, 0, input.y)).eulerAngles.y);
-				robot.AccelerateTowards(robot.acceleration);
+				robot.AccelerateTowards(1);
 			}
 		}
 	}
