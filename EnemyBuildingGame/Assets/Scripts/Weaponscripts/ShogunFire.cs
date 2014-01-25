@@ -8,13 +8,14 @@ public class ShogunFire : Part
 
 	public float ammoDamage;
 	public float ammoSpeed;
-	public int amountOfLazers = 10;
+	
+	public float ammoActiveTime = 1.0f;
 
-	public float activeTime = 0.5f;
+	public int amountOfLazers = 10;
 
 	LineRenderer line;
 
-	//public Lazer ammoPrefab;
+	public Lazer ammoPrefab;
 	public Transform ammoSpawnPos;
 	public float coolDown = 2.0f;
 	private float lastFired;
@@ -45,11 +46,14 @@ public class ShogunFire : Part
 			for (int n=1; n<amountOfLazers; n++) 
 			{
 								
-				GameObject go = Instantiate(ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation) as GameObject;
+				GameObject go = Instantiate(ammoPrefab.gameObject) as GameObject;
 				Lazer bullet = go.GetComponent<Lazer>();
+				bullet.origin = ammoSpawnPos.position;
 				//bullet.speed = ammoSpeed;
-				//bullet.damage = ammoDamage;
-				lastFired = Time.time;
+				bullet.damage = ammoDamage;
+				bullet.lifetime = ammoActiveTime;
+				bullet.loc = ammoSpawnPos;
+
 
 			}
 			lastFired = Time.time;

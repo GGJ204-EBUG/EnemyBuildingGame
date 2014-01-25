@@ -4,9 +4,11 @@ using System.Collections;
 public class Lazer : MonoBehaviour {
 	
 	public float damage=1;
-	public float offset;
 	public float lifetime=3.0f;
 	public float timecreated;
+	public Vector3 origin;
+	public Transform loc;
+	//public 
 
 	LineRenderer line;
 
@@ -16,6 +18,11 @@ public class Lazer : MonoBehaviour {
 		
 		timecreated = Time.time;
 		line = gameObject.GetComponent <LineRenderer>();
+
+		Ray ray = new Ray(origin, loc.forward);
+		RaycastHit hit;
+		
+		line.SetPosition(0, loc.localPosition);
 		line.enabled = true;
 
 
@@ -31,30 +38,6 @@ public class Lazer : MonoBehaviour {
 //		transform.Translate(Vector3.forward * Time.deltaTime * speed);
 		
 	}
-	
-	void OnTriggerStay(Collider col) 
-	{
-		
-		GameObject target;
-		if (col.attachedRigidbody != null) 
-		{
-			target = col.attachedRigidbody.gameObject;
-		}
-		else
-		{
-			target = col.gameObject;
-		}	
-		Damage dam = new Damage();
-		dam.amount = damage;
-		dam.source = this;
-		dam.targetCollider = col;
-		
-		DamageReceiver receiver = target.GetComponent<DamageReceiver>();
-		if (receiver != null)
-		{
-			Debug.Log("bum");
-			receiver.TakeDamage(dam);
-		}
-		
-	}
+
+
 }
