@@ -12,17 +12,17 @@ public class Lazer : MonoBehaviour {
 
 	LineRenderer line;
 
-	
+		
 	// Use this for initialization
 	void Start () {
 		
 		timecreated = Time.time;
 		line = gameObject.GetComponent <LineRenderer>();
 
-		Ray ray = new Ray(origin, loc.forward);
+		Ray ray = new Ray(loc.position, loc.forward);
 		RaycastHit hit;
 		
-		line.SetPosition(0, loc.localPosition);
+		line.SetPosition(0, origin);
 		line.enabled = true;
 
 
