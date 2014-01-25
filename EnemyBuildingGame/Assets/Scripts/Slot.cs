@@ -21,10 +21,13 @@ public class Slot : MonoBehaviour{
 
 	public bool CanSet (Part part)
 	{
+		
+		Debug.Log (" osan tyyppi " +part.type + ", slotin tyyppi " + type);
 		return part.type == type;
 	}
 
 	public bool CanReplace (Part part){
+
 		return part == null || part.type == type;
 	}
 

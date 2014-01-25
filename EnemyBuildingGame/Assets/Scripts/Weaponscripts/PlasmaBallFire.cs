@@ -12,7 +12,7 @@ public class PlasmaBallFire : Part
 	public Transform ammoSpawnPos;
 	public float coolDown = 0.25f;
 	private float lastFired;
-	
+
 	// Use this for initialization
 	void Start () {
 		

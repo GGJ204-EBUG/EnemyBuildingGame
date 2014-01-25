@@ -24,7 +24,13 @@ public class PartButton : MonoBehaviour, Button {
 			Part temp = stack.Pop();
 			foreach(Slot slot in temp.Slots){
 				Debug.Log (slot + " " + slot.Attachment);
-				if(slot.CanSet(part)){
+				if(slot.CanSet(part) && slot.Attachment == null){
+					/*
+					if(slot.Attachment != null)
+						Destroy(slot.Attachment);
+					*/
+					
+					Debug.Log (slot + "asd " + slot.Attachment);
 					slot.Attachment = Instantiate (part) as Part;
 					slot.Attachment.transform.parent = slot.transform;
 					slot.Attachment.transform.localPosition = Vector3.zero;
