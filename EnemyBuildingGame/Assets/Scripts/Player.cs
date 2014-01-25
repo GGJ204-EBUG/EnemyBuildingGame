@@ -10,33 +10,26 @@ public class Player : MonoBehaviour
 	{
 		if (robot != null)
 		{
-			float input;
+			Vector2 input;
 			if (isPlayerOne)
 			{
-				input = Input.GetAxis("Player One Turn");
+				input.x = Input.GetAxis("Player One Turn");
+				input.y = Input.GetAxis("Player One Forward");
 			}
 			else
 			{
-				input = Input.GetAxis("Player Two Turn");
+				input.x = Input.GetAxis("Player Two Turn");
+				input.y = Input.GetAxis("Player Two Forward");
 			}
-			robot.Turn(input);
-		}
-	}
-
-	void FixedUpdate()
-	{
-		if (robot != null)
-		{
-			float input;
-			if (isPlayerOne)
+			if (Mathf.Approximately(input.magnitude, 0))
 			{
-				input = Input.GetAxis("Player One Forward");
+				robot.AccelerateTowards(0);
 			}
 			else
 			{
-				input = Input.GetAxis("Player Two Forward");
+				robot.TurnTowards(Quaternion.LookRotation(new Vector3(input.x, 0, input.y)).eulerAngles.y);
+				robot.AccelerateTowards(robot.acceleration);
 			}
-			robot.Accelerate(input);
 		}
 	}
 }
