@@ -3,6 +3,28 @@ using System.Collections;
 
 public class EBG : MonoBehaviour
 {
+	public enum GameState
+	{
+		Unknown = 0,
+		Building = 1,
+		Playing = 2,
+		MatchOver = 3,
+		GameOver = 4
+	}
+
+	public GameState CurrentGameState { get; set; }
+	public static GameState CurrentState
+	{
+		get
+		{
+			return Instance.CurrentGameState;
+		}
+		set
+		{
+			Instance.CurrentGameState = value;
+		}
+	}
+
 	private static EBG instance;
 	public static EBG Instance
 	{
@@ -35,6 +57,11 @@ public class EBG : MonoBehaviour
 		{
 			return player2;
 		}
+	}
+
+	void Awake()
+	{
+		DontDestroyOnLoad(gameObject);
 	}
 
 	#region static convenience methods
