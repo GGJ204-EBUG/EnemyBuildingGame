@@ -12,8 +12,7 @@ public class PlasmaBallFire : Part
 	public Transform ammoSpawnPos;
 	public float coolDown = 0.25f;
 	private float lastFired;
-	
-<<<<<<< HEAD
+
 	/*
 	private Slot[] slots = {};
 	override public Slot[] Slots {
@@ -23,8 +22,6 @@ public class PlasmaBallFire : Part
 	}
 	*/
 
-=======
->>>>>>> d65dbad7dae417eb4b6892eb07502a8269565d16
 	// Use this for initialization
 	void Start () {
 		
