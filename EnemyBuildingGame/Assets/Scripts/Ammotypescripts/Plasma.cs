@@ -40,7 +40,7 @@ public class Plasma : MonoBehaviour {
 			target = col.gameObject;
 		}	
 		Damage dam = new Damage();
-		dam.amount = damage/((Time.time/timecreated)+1.0f);
+		dam.amount = Time.deltaTime * damage / ((Time.time - timecreated)+1.0f);
 		dam.source = this;
 		dam.targetCollider = col;
 		
