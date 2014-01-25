@@ -4,23 +4,9 @@ using System.Collections;
 public class Player : MonoBehaviour 
 {
 	public bool isPlayerOne = true;
-	public Transform robot;
-	public float rotateSpeed = 10;
-	public float acceleration = 10;
+	public Robot robot;
 	
-	private Rigidbody rigid;
-	
-	void Awake()
-	{
-		this.rigid = robot.rigidbody;
-	}
-	
-	void Start ()
-	{
-	
-	}
-	
-	void Update ()
+	void Update()
 	{
 		if (robot != null)
 		{
@@ -33,10 +19,10 @@ public class Player : MonoBehaviour
 			{
 				input = Input.GetAxis("Player Two Turn");
 			}
-			robot.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * input);
+			robot.Turn(input);
 		}
 	}
-	
+
 	void FixedUpdate()
 	{
 		if (robot != null)
@@ -50,9 +36,7 @@ public class Player : MonoBehaviour
 			{
 				input = Input.GetAxis("Player Two Forward");
 			}
-			
-			rigid.AddRelativeForce(Vector3.forward * acceleration * input);
+			robot.Accelerate(input);
 		}
-
 	}
 }
