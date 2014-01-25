@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Weapon : MonoBehaviour
+public class Weapon : Part
 {
 	public float ammoDamage;
 	public float ammoSpeed;
@@ -10,6 +11,14 @@ public class Weapon : MonoBehaviour
 	public Transform ammoSpawnPos;
 	public float coolDown = 0.25f;
 	private float lastFired;
+
+
+	private Slot[] slots = {};
+	override public Slot[] Slots {
+		get {
+			return slots;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
