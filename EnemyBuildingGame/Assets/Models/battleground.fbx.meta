@@ -8,23 +8,58 @@ ModelImporter:
     100004: landscape
     100006: poles
     100008: trees
+    100010: landscape_001
+    100012: poles_001
+    100014: poles_002
+    100016: poles_003
+    100018: poles_004
+    100020: poles_005
+    100022: poles_006
     400000: arena
     400002: //RootNode
     400004: landscape
     400006: poles
     400008: trees
+    400010: landscape_001
+    400012: poles_001
+    400014: poles_002
+    400016: poles_003
+    400018: poles_004
+    400020: poles_005
+    400022: poles_006
     2300000: arena
     2300002: landscape
     2300004: poles
     2300006: trees
+    2300008: landscape_001
+    2300010: poles_001
+    2300012: poles_002
+    2300014: poles_003
+    2300016: poles_004
+    2300018: poles_005
+    2300020: poles_006
     3300000: arena
     3300002: landscape
     3300004: poles
     3300006: trees
+    3300008: landscape_001
+    3300010: poles_001
+    3300012: poles_002
+    3300014: poles_003
+    3300016: poles_004
+    3300018: poles_005
+    3300020: poles_006
     4300000: landscape
     4300002: trees
     4300004: poles
     4300006: arena
+    4300008: landscape_001
+    4300010: poles_006
+    4300012: poles_005
+    4300014: poles_004
+    4300016: poles_003
+    4300018: poles_002
+    4300020: poles_001
     7400000: Default Take
     9500000: //RootNode
   materials:

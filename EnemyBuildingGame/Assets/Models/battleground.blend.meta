@@ -23,6 +23,13 @@ ModelImporter:
     100034: arena
     100036: landscape
     100038: poles
+    100040: landscape_001
+    100042: poles_001
+    100044: poles_002
+    100046: poles_003
+    100048: poles_004
+    100050: poles_005
+    100052: poles_006
     400000: //RootNode
     400002: Cube
     400004: Cube_001
@@ -43,6 +50,13 @@ ModelImporter:
     400034: arena
     400036: landscape
     400038: poles
+    400040: landscape_001
+    400042: poles_001
+    400044: poles_002
+    400046: poles_003
+    400048: poles_004
+    400050: poles_005
+    400052: poles_006
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -61,6 +75,13 @@ ModelImporter:
     2300030: arena
     2300032: landscape
     2300034: poles
+    2300036: landscape_001
+    2300038: poles_001
+    2300040: poles_002
+    2300042: poles_003
+    2300044: poles_004
+    2300046: poles_005
+    2300048: poles_006
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -79,6 +100,13 @@ ModelImporter:
     3300030: arena
     3300032: landscape
     3300034: poles
+    3300036: landscape_001
+    3300038: poles_001
+    3300040: poles_002
+    3300042: poles_003
+    3300044: poles_004
+    3300046: poles_005
+    3300048: poles_006
     4300000: hombre_037
     4300002: Landscape_002
     4300004: trees
@@ -98,6 +126,13 @@ ModelImporter:
     4300032: landscape
     4300034: poles
     4300036: arena
+    4300038: landscape_001
+    4300040: poles_006
+    4300042: poles_005
+    4300044: poles_004
+    4300046: poles_003
+    4300048: poles_002
+    4300050: poles_001
     7400000: Default Take
     9500000: //RootNode
     13700000: hombre_037
