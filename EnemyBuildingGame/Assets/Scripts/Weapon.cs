@@ -61,7 +61,7 @@ public class Weapon : Part {
 			}
 			else
 			{
-				attachedRigidbody.AddRelativeForce(transform.forward * recoil);
+				attachedRigidbody.AddRelativeForce(-Vector3.forward * recoil);
 			}
 		}
 	}

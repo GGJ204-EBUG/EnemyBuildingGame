@@ -49,19 +49,17 @@ public class Explosion : MonoBehaviour {
 		if (!targets.Contains(target))
 		{
 			targets.Add(target);
-			float dist = (target.transform.position - transform.position).sqrMagnitude;
-
-			damage *= dist / (radius * radius);
+			float dist = (target.transform.position - transform.position).magnitude;
 
 			Damage dam = new Damage();
-			dam.amount = damage;
+			dam.amount = damage * radius / (dist + 1);
 			dam.source = this;
 			dam.targetCollider = col;
 			
 			DamageReceiver receiver = target.GetComponent<DamageReceiver>();
 			if (receiver != null)
 			{
-				Debug.Log("explo to " + receiver.gameObject.name + " " + dam.amount);
+				Debug.Log("explo to " + receiver.gameObject.name + " " + dam.amount + " " + damage + " " + radius);
 				receiver.TakeDamage(dam);
 			}
 
