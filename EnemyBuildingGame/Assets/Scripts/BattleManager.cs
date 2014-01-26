@@ -22,8 +22,9 @@ public class BattleManager : MonoBehaviour {
 		EBG.P2.MakeRobot();
 
 		EBG.P1.robot.transform.position = player1Start.position;
-		EBG.P1.robot.transform.rotation = player1Start.rotation;
 		EBG.P2.robot.transform.position = player2Start.position;
+
+		EBG.P1.robot.transform.rotation = player1Start.rotation;
 		EBG.P2.robot.transform.rotation = player2Start.rotation;
 
 		EBG.CurrentState = EBG.GameState.MatchIntro;

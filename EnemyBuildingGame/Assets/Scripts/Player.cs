@@ -83,18 +83,17 @@ public class Player : MonoBehaviour
 			bool reverse = false;
 			if (isPlayerOne)
 			{
-
-				input.x = Input.GetAxis("Player One Turn");
-				input.y = Input.GetAxis("Player One Forward");
-
-				if (Input.GetKey(KeyCode.LeftShift)) reverse = true;
-			}
-			else
-			{
 				input.x = Input.GetAxis("Player Two Turn");
 				input.y = Input.GetAxis("Player Two Forward");
 
 				if (Input.GetKey(KeyCode.RightShift)) reverse = true;
+			}
+			else
+			{
+				input.x = Input.GetAxis("Player One Turn");
+				input.y = Input.GetAxis("Player One Forward");
+
+				if (Input.GetKey(KeyCode.LeftShift)) reverse = true;
 			}
 
 			if (Mathf.Approximately(input.magnitude, 0))

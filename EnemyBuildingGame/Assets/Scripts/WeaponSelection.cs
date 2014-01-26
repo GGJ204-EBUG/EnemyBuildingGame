@@ -22,7 +22,7 @@ public class WeaponSelection : MonoBehaviour {
 		label.text = EBG.P1.PlayerName;
 		label.color = EBG.P1.playerColor;
 
-		Current = EBG.P2;
+		Current = EBG.P1;
 
 		if (music != null) AudioManager.Instance.PlayMusic(music, true);
 	}
@@ -99,11 +99,11 @@ public class WeaponSelection : MonoBehaviour {
 
 	void Done()
 	{
-		if (Current == EBG.P2)
+		if (Current == EBG.P1)
 		{
 			label.text = EBG.P2.PlayerName;
 			//EBG.P2.SetProtoType(EBG.P2.robot);
-			Current = EBG.P1;
+			Current = EBG.P2;
 			tempWeapon = null;
 			label.color = EBG.P2.playerColor;
 			if (selected != null)
