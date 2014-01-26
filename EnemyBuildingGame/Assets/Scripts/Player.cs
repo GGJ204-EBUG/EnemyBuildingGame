@@ -31,6 +31,19 @@ public class Player : MonoBehaviour
 
 	private Vector2 input;
 
+	public void SetProtoType(Robot proto)
+	{
+		if (protoType != null && protoType != proto) Destroy(protoType);
+
+		Part[] parts = proto.GetComponentsInChildren<Part>();
+		for (int i = 0; i < parts.Length; i++)
+		{
+			parts[i].enabled = true;
+		}
+		proto.gameObject.SetActive(false);
+		protoType = proto;
+	}
+
 	public void MakeRobot()
 	{
 		if (protoType == null) return;
