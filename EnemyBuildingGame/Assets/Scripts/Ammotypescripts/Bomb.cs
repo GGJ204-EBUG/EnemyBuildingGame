@@ -17,9 +17,6 @@ public class Bomb : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		throwTime = Time.time;
-		rigidbody.AddForce(Vector3.up*50);
-		rigidbody.AddForce(Vector3.forward*100);
-
 	}
 	
 	// Update is called once per frame

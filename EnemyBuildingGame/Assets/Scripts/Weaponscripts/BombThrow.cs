@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BombThrow : MonoBehaviour {
+public class BombThrow : Part {
 
 	public Bomb ammoPrefab;
 	public Transform ammoSpawnPos;
@@ -9,6 +9,7 @@ public class BombThrow : MonoBehaviour {
 	public float expRadius;
 	public float expDamage;
 	public float expTime;
+	public Vector3 throwForce = new Vector3(0, 70, 150);
 
 	public float coolDown;
 	private float lastFired;
@@ -30,6 +31,7 @@ public class BombThrow : MonoBehaviour {
 	void Throw () {
 		if(ammoPrefab != null) {
 			GameObject go = Instantiate(ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation) as GameObject;
+			go.rigidbody.AddRelativeForce(throwForce);
 			Bomb bomb = go.GetComponent<Bomb>();
 			bomb.fuseLength = fuse;
 			bomb.damage = expDamage;

@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
 	public bool isPlayerOne = true;
 	public Robot robot;
 	
-	public Robot protoType;
+	public Robot prototype;
+	public Robot protoTypePrefab;
 
 	bool isTouchPlatform;
 
@@ -27,30 +28,49 @@ public class Player : MonoBehaviour
 		{
 			isTouchPlatform = false;
 		}
+
+		if (prototype == null)
+		{
+			GameObject go = Instantiate(protoTypePrefab.gameObject) as GameObject;
+
+			SetProtoType(go.GetComponent<Robot>());
+		}
 	}
 
 	private Vector2 input;
 
+	public void SetPrototypeWeaponsEnabled(bool isEnabled)
+	{
+		if (prototype != null)
+		{
+			Part[] parts = prototype.GetComponentsInChildren<Part>();
+			for (int i = 0; i < parts.Length; i++)
+			{
+				parts[i].enabled = isEnabled;
+			}
+		}
+	}
+
 	public void SetProtoType(Robot proto)
 	{
-		if (protoType != null && protoType != proto) Destroy(protoType);
+		if (prototype != null && prototype != proto) Destroy(prototype);
 
-		Part[] parts = proto.GetComponentsInChildren<Part>();
-		for (int i = 0; i < parts.Length; i++)
-		{
-			parts[i].enabled = true;
-		}
+		Debug.Log("SetProtoType");
+		SetPrototypeWeaponsEnabled(true);
+		proto.transform.parent = transform;
 		proto.gameObject.SetActive(false);
-		protoType = proto;
+
+		prototype = proto;
 	}
 
 	public void MakeRobot()
 	{
-		if (protoType == null) return;
+		if (prototype == null) return;
 
 		if (robot != null) Destroy(robot.gameObject);
 
-		GameObject go = Instantiate(protoType.gameObject) as GameObject;
+		GameObject go = Instantiate(prototype.gameObject) as GameObject;
+
 		go.SetActive(true);
 		robot = go.GetComponent<Robot>();
 	}
