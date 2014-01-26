@@ -7,9 +7,15 @@ public class LaserCannon : Weapon
 	public Transform startPos;
 	public LineRenderer line;
 
+	private AudioSource sound;
 	private float range = 100;
 
 	bool isFiring =	false;
+
+	void Start()
+	{
+		sound = audio;
+	}
 
 	void Update()
 	{
@@ -53,6 +59,7 @@ public class LaserCannon : Weapon
 
 		if (isFiring)
 		{
+			if (sound != null) sound.Play();
 			line.gameObject.SetActive(true);
 		}
 		else
