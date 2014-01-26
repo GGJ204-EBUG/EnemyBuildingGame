@@ -76,6 +76,6 @@ public class BattleManager : MonoBehaviour {
 	{
 		if (EBG.P1.robot != null) Destroy(EBG.P1.robot.gameObject);
 		if (EBG.P2.robot != null) Destroy(EBG.P2.robot.gameObject);
-		Application.LoadLevel(1);
+		Application.LoadLevel(2);
 	}
 }
