@@ -9,7 +9,8 @@ public class EBG : MonoBehaviour
 		Building = 1,
 		Playing = 2,
 		MatchOver = 3,
-		GameOver = 4
+		GameOver = 4,
+		MatchIntro = 5,
 	}
 
 	public GameState CurrentGameState { get; set; }

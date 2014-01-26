@@ -7,7 +7,8 @@ public class Plasma : MonoBehaviour {
 	public float speed;
 	public float lifetime=3;
 	public float timecreated;
-
+	public ParticleSystem plasmaParticles;
+	Color col = Color.white;
 
 	// Use this for initialization
 	void Start () {
@@ -21,9 +22,15 @@ public class Plasma : MonoBehaviour {
 		
 		if(Time.time > timecreated+lifetime)
 			Destroy(gameObject);
-
-		transform.Translate(Vector3.forward * Time.deltaTime * speed);
-		transform.localScale *= 1.015f;
+		else
+		{
+			transform.Translate(Vector3.forward * Time.deltaTime * speed);
+			transform.localScale *= 1.012f;
+			col.a = 1 - (Time.time - timecreated - 1) / (lifetime - 1);
+			plasmaParticles.startColor = col;
+			if (Time.time > timecreated + lifetime - 1) plasmaParticles.Stop();
+			Debug.Log(col.a);
+		}
 
 	}
 

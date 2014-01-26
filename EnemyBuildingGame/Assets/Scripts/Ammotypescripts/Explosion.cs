@@ -59,7 +59,6 @@ public class Explosion : MonoBehaviour {
 			DamageReceiver receiver = target.GetComponent<DamageReceiver>();
 			if (receiver != null)
 			{
-				Debug.Log("explo to " + receiver.gameObject.name + " " + dam.amount + " " + damage + " " + radius);
 				receiver.TakeDamage(dam);
 			}
 

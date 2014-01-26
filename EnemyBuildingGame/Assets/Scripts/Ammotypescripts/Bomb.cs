@@ -23,8 +23,6 @@ public class Bomb : MonoBehaviour {
 	void Update () {
 		if (Time.time>(throwTime+fuseLength) && exploded == false) {
 
-			Debug.Log("Boom!!");
-			
 			if (explosion != null)
 			{
 				GameObject go = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;

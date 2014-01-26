@@ -15,14 +15,24 @@ public class Robot : MonoBehaviour {
 	public float CurrentHeading { get; private set; }
 	public float CurrentAcceleration { get; private set; }
 
-	public Transform MoveTarget { get; private set;}
-
-	void Start()
-	{
-		GameObject go = new GameObject("Move target dummy");
-		go.transform.parent = transform;
-		MoveTarget = go.transform;
+	private Transform _moveTarget;
+	public Transform MoveTarget
+	{ 
+		get
+		{
+			if (_moveTarget == null)
+			{
+				GameObject go = new GameObject("Move target dummy");
+				go.transform.parent = transform;
+				_moveTarget = go.transform;
+			}
+			return _moveTarget;
+		}
 	}
+
+	public Transform primaryPlace;
+	
+
 	void Update()
 	{
 		if (CurrentHeading > TargetHeading + 180) CurrentHeading -= 360;
