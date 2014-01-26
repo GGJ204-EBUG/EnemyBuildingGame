@@ -33,15 +33,21 @@ public class Player : MonoBehaviour
 	{
 		if (robot != null && !isTouchPlatform)
 		{
+			bool reverse = false;
 			if (isPlayerOne)
 			{
+
 				input.x = Input.GetAxis("Player One Turn");
 				input.y = Input.GetAxis("Player One Forward");
+
+				if (Input.GetKey(KeyCode.LeftShift)) reverse = true;
 			}
 			else
 			{
 				input.x = Input.GetAxis("Player Two Turn");
 				input.y = Input.GetAxis("Player Two Forward");
+
+				if (Input.GetKey(KeyCode.RightShift)) reverse = true;
 			}
 
 			if (Mathf.Approximately(input.magnitude, 0))
@@ -50,8 +56,10 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
+
 				robot.TurnTowards(Quaternion.LookRotation(new Vector3(input.x, 0, input.y)).eulerAngles.y);
-				robot.AccelerateTowards(1);
+				if (reverse) robot.AccelerateTowards(-1);
+				else robot.AccelerateTowards(1);
 			}
 		}
 	}
