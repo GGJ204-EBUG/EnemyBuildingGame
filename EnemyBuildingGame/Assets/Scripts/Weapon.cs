@@ -36,12 +36,9 @@ public class Weapon : Part {
 		if (EBG.CurrentState != EBG.GameState.Playing) return;
 		if ((totalBeats + beatOffset) % beatCount == 0) 
 		{	
-			Debug.Log(gameObject.name + " " + count + " " + time);	
 			Fire (time);
 		}
 		if ((totalBeats + beatOffset) % beatCount == secondShotOffset)  Fire (time);
-		//if ((count + beatCount) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
-		//else if ((count + beatCount + secondShotOffset) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
 	}
 
 	public virtual void Fire(double time)

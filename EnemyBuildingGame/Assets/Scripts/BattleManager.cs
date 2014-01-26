@@ -9,8 +9,12 @@ public class BattleManager : MonoBehaviour {
 	public AudioClip fanfare;
 	private float gameTimer = 0;
 	public TextMesh counter;
-
+	public GameObject winPrefab;
+	public GameObject losePrefab;
+	public Transform p1WinPos;
+	public Transform p2WinPos;
 	public Player Winner { get; private set; }
+	private float matchEndTime;
 
 	// Use this for initialization
 	void Start () {
@@ -48,27 +52,47 @@ public class BattleManager : MonoBehaviour {
 		{
 			if (EBG.P1.robot == null)
 			{
-				EBG.CurrentState = EBG.GameState.GameOver;
 				Winner = EBG.P1;
-				if (fanfare != null) AudioManager.Instance.PlayMusic(fanfare, false);
+				EndGame();
 			}
 			if (EBG.P2.robot == null)
 			{
-				EBG.CurrentState = EBG.GameState.GameOver;
 				Winner = EBG.P2;
-				if (fanfare != null) AudioManager.Instance.PlayMusic(fanfare, false);
+				EndGame();
 			}
 		}
+		else if (EBG.CurrentState == EBG.GameState.MatchOver && Time.time > matchEndTime + 5)
+		{
+			if (Input.anyKey) RestartGame();  
+		}
 	}
-
+	/*
 	void OnGUI()
 	{
-		if (EBG.CurrentState == EBG.GameState.GameOver)
+		if (EBG.CurrentState == EBG.GameState.GameOver && replay == null)
 		{
 			if (GUI.Button(new Rect(Screen.width * 0.5f - 200, Screen.height * 0.5f - 50, 400, 100), Winner.PlayerName + " was defeated.\n" + Winner.PlayerName + " wins!\nRematch?"))
 			{
 				RestartGame();
 			}
+		}
+	}*/
+
+	void EndGame()
+	{
+		matchEndTime = Time.time;
+		EBG.CurrentState = EBG.GameState.MatchOver;
+		if (fanfare != null) AudioManager.Instance.PlayMusic(fanfare, false);
+
+		if (Winner == EBG.P1)
+		{
+			Instantiate(winPrefab, p2WinPos.position, p2WinPos.rotation);
+			Instantiate(losePrefab, p1WinPos.position, p1WinPos.rotation);
+		}
+		else
+		{
+			Instantiate(losePrefab, p2WinPos.position, p2WinPos.rotation);
+			Instantiate(winPrefab, p1WinPos.position, p1WinPos.rotation);
 		}
 	}
 

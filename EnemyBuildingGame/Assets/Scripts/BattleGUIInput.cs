@@ -13,7 +13,7 @@ public class BattleGUIInput : MonoBehaviour
 			for (int i = 0; i < Input.touchCount; i++)
 			{
 				RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.touches[i].position), Vector3.forward);
-				if (hit != null && hit.collider != null)
+				if (hit.collider != null)
 				{
 					if (Input.touches[i].phase == TouchPhase.Ended || Input.touches[i].phase == TouchPhase.Canceled)
 					{
@@ -26,7 +26,7 @@ public class BattleGUIInput : MonoBehaviour
 				}
 			}
 		}
-		else if (!multiTouch || (Input.touchCount == 0 && Input.GetMouseButton(0) || Input.GetMouseButtonUp(0)))
+		else if (!multiTouch || (Input.touchCount == 0 && Input.GetMouseButton(0)))
 		{
 			RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
 			if (hit != null && hit.collider != null)
