@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BombThrow : MonoBehaviour {
+public class BombThrow : Part {
 
 	public Bomb ammoPrefab;
 	public Transform ammoSpawnPos;
