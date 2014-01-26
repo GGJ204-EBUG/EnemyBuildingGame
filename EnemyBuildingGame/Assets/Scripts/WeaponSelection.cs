@@ -13,6 +13,10 @@ public class WeaponSelection : MonoBehaviour {
 	private GameObject tempWeapon;
 	public AudioClip music;
 
+	public GenericButton creditsButtons;
+
+	public GenericButton introButton;
+
 	void Start()
 	{
 		label.text = EBG.P1.PlayerName;
@@ -30,6 +34,8 @@ public class WeaponSelection : MonoBehaviour {
 			buttons[i].OnTouchEnded += OnButtonPress;
 		}
 		doneButton.OnTouchEnded += OnButtonPress;
+		creditsButtons.OnTouchEnded += OnButtonPress;
+		introButton.OnTouchEnded += OnButtonPress;
 	}
 
 	void OnButtonPress(GenericButton button)
@@ -51,6 +57,8 @@ public class WeaponSelection : MonoBehaviour {
 			SetWeapon(button);
 		}
 		else if (button == doneButton) Done();
+		else if (button == introButton) Application.LoadLevel(1);
+		else if (button == creditsButtons) Application.LoadLevel("Credits");
 	}
 
 	void OnDisable()
@@ -60,6 +68,8 @@ public class WeaponSelection : MonoBehaviour {
 			buttons[i].OnTouchEnded -= OnButtonPress;
 		}
 		doneButton.OnTouchEnded -= OnButtonPress;
+		creditsButtons.OnTouchEnded -= OnButtonPress;
+		introButton.OnTouchEnded -= OnButtonPress;
 	}
 
 	void Update()
