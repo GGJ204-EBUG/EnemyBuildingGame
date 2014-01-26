@@ -27,7 +27,7 @@ public class Splash : MonoBehaviour
 
 		GUI.color = col;
 
-		GUI.Label(new Rect(0,0,Screen.width,Screen.height), "EBG", style);
+		GUI.Label(new Rect(0,0,Screen.width,Screen.height), " ", style);
 
 		GUI.color = Color.white;
 	}
