@@ -12,10 +12,13 @@ public class Player : MonoBehaviour
 	public Robot protoTypePrefab;
 	public Color playerColor;
 
+	private float rot;
+
 	bool isTouchPlatform;
 
 	void Awake()
 	{
+		rot = 0;
 		if (!Application.isEditor &&
 		    (
 			Application.platform == RuntimePlatform.Android ||
@@ -80,7 +83,6 @@ public class Player : MonoBehaviour
 	{
 		if (robot != null && !isTouchPlatform)
 		{
-			bool reverse = false;
 			if (isPlayerOne)
 			{
 				input.x = Input.GetAxis("Player Two Turn");
@@ -102,9 +104,13 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				robot.TurnTowards(Quaternion.LookRotation(new Vector3(input.x, 0, input.y)).eulerAngles.y);
-				if (reverse) robot.AccelerateTowards(-1);
-				else robot.AccelerateTowards(1);
+				//robot.
+				robot.AccelerateTowards(input.y);
+				rot += input.x * 1.5f;
+				robot.TurnTowards(rot);
+				//robot.TurnTowards(Quaternion.LookRotation(new Vector3(input.x, 0, 0)).eulerAngles.y);
+				//if (reverse) robot.AccelerateTowards(-1);
+				//else robot.AccelerateTowards(1);
 			}
 		}
 	}
