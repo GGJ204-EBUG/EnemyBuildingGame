@@ -7,6 +7,7 @@ public class Rocket : MonoBehaviour
 	public float fuel;
 	public float timer;
 	public GameObject explosion;
+	public float minFuse = 0.5f;
 	
 	public ParticleSystem engineParticles;
 
@@ -33,6 +34,14 @@ public class Rocket : MonoBehaviour
 	void FixedUpdate()
 	{
 		if (propulsion > 0) rigidbody.AddRelativeForce(Vector3.forward * propulsion, ForceMode.Acceleration);
+	}
+
+	void OnCollisionEnter(Collision col)
+	{
+		if (Time.time > startTime + minFuse && col.relativeVelocity.sqrMagnitude > 1) 
+		{
+			Explode();
+		}
 	}
 
 	void Explode()

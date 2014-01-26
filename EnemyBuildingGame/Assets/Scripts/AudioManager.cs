@@ -96,7 +96,7 @@ public class AudioManager : MonoBehaviour
 		}
 		else if (music.volume < 1)
 		{
-			music.volume += Time.deltaTime;
+			music.volume += Time.deltaTime * 4;
 		}
 	}
 

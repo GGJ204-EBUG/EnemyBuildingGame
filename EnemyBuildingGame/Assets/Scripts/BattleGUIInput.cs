@@ -3,26 +3,30 @@ using System.Collections;
 
 public class BattleGUIInput : MonoBehaviour 
 {
+	public bool multiTouch = true;
 	public Camera cam;
 
 	void Update ()
 	{
-		for (int i = 0; i < Input.touchCount; i++)
+		if (multiTouch)
 		{
-			RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.touches[i].position), Vector3.forward);
-			if (hit != null && hit.collider != null)
+			for (int i = 0; i < Input.touchCount; i++)
 			{
-				if (Input.touches[i].phase == TouchPhase.Ended)
+				RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.touches[i].position), Vector3.forward);
+				if (hit != null && hit.collider != null)
 				{
-					hit.collider.SendMessage("OnTouchEnd", SendMessageOptions.DontRequireReceiver);
-				}
-				else
-				{
-					hit.collider.SendMessage("OnTouch", hit.point, SendMessageOptions.DontRequireReceiver);
+					if (Input.touches[i].phase == TouchPhase.Ended || Input.touches[i].phase == TouchPhase.Canceled)
+					{
+						hit.collider.SendMessage("OnTouchEnd", SendMessageOptions.DontRequireReceiver);
+					}
+					else
+					{
+						hit.collider.SendMessage("OnTouch", hit.point, SendMessageOptions.DontRequireReceiver);
+					}
 				}
 			}
 		}
-		if (Input.touchCount == 0 && Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
+		else if (!multiTouch || (Input.touchCount == 0 && Input.GetMouseButton(0) || Input.GetMouseButtonUp(0)))
 		{
 			RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
 			if (hit != null && hit.collider != null)

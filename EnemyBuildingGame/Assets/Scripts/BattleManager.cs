@@ -6,6 +6,7 @@ public class BattleManager : MonoBehaviour {
 	public Transform player2Start;
 	public float introTime = 5;
 	public AudioClip music;
+	public AudioClip fanfare;
 	private float gameTimer = 0;
 	public TextMesh counter;
 
@@ -49,11 +50,13 @@ public class BattleManager : MonoBehaviour {
 			{
 				EBG.CurrentState = EBG.GameState.GameOver;
 				Winner = EBG.P1;
+				if (fanfare != null) AudioManager.Instance.PlayMusic(fanfare, false);
 			}
 			if (EBG.P2.robot == null)
 			{
 				EBG.CurrentState = EBG.GameState.GameOver;
 				Winner = EBG.P2;
+				if (fanfare != null) AudioManager.Instance.PlayMusic(fanfare, false);
 			}
 		}
 	}

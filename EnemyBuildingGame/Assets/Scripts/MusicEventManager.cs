@@ -16,7 +16,7 @@ public class MusicEventManager : MonoBehaviour
 		}
 	}
 
-	public delegate void OnMusicBeatHandler(int count, double time);
+	public delegate void OnMusicBeatHandler(int count, int totalBeats, double time);
 	public static event OnMusicBeatHandler OnBeat;
 
 	public int countTo = 16;
@@ -44,13 +44,16 @@ public class MusicEventManager : MonoBehaviour
 	void Beat()
 	{
 		if (firstTime <= 0) firstTime = gameTime;
-		count ++;
 		totalBeats ++;
+
+		count ++;
+
+
 		if (count >= countTo) count = 0;
 
 		nextBeat = firstTime + totalBeats * interval;
 
-		if (OnBeat != null) OnBeat(count, nextBeat);
+		if (OnBeat != null) OnBeat(count, totalBeats, nextBeat);
 	}
 
 	public double GetNext()

@@ -31,11 +31,15 @@ public class Weapon : Part {
 		MusicEventManager.OnBeat -= OnBeat;
 	}
 	
-	protected virtual void OnBeat(int count, double time)
+	protected virtual void OnBeat(int count, int totalBeats, double time)
 	{
 		if (EBG.CurrentState != EBG.GameState.Playing) return;
-		if ((count + beatOffset) % beatCount == 0) Fire (time);
-		else if ((count + beatOffset + secondShotOffset) % beatCount == 0) Fire (time);
+		if ((totalBeats + beatOffset) % beatCount == 0) 
+		{	
+			Debug.Log(gameObject.name + " " + count + " " + time);	
+			Fire (time);
+		}
+		if ((totalBeats + beatOffset) % beatCount == secondShotOffset)  Fire (time);
 		//if ((count + beatCount) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
 		//else if ((count + beatCount + secondShotOffset) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
 	}

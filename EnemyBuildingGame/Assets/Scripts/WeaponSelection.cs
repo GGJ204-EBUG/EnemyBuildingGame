@@ -11,6 +11,7 @@ public class WeaponSelection : MonoBehaviour {
 	public GenericButton doneButton;
 	private GenericButton selected;
 	private GameObject tempWeapon;
+	public AudioClip music;
 
 	void Start()
 	{
@@ -18,6 +19,8 @@ public class WeaponSelection : MonoBehaviour {
 		label.color = EBG.P1.playerColor;
 
 		Current = EBG.P2;
+
+		if (music != null) AudioManager.Instance.PlayMusic(music, true);
 	}
 
 	void OnEnable()
@@ -31,10 +34,18 @@ public class WeaponSelection : MonoBehaviour {
 
 	void OnButtonPress(GenericButton button)
 	{
-		if (button == selected) selected = null;
+		if (button == selected) 
+		{
+			selected.GetComponent<ButtonHighlight>().UnSelect();
+			selected = null;
+		}
 		else if (buttons.Contains(button))
 		{
-			if (selected != null) selected.GetComponent<ButtonHighlight>().UnSelect();
+			if (selected != null)
+			{
+				selected.GetComponent<ButtonHighlight>().UnSelect();
+				selected = null;
+			}
 			selected = button;
 			selected.GetComponent<ButtonHighlight>().Select();
 			SetWeapon(button);
@@ -62,8 +73,17 @@ public class WeaponSelection : MonoBehaviour {
 		if (tempWeapon != null) Destroy(tempWeapon);
 
 		Transform parent = Current.prototype.primaryPlace;
-		int i = buttons.IndexOf(button);
-		tempWeapon = Instantiate(buttonWeapons[i], parent.position, parent.rotation) as GameObject;
+
+		int j = 0;
+		while (parent.childCount > 0)
+		{
+			j++;
+			Destroy(parent.GetChild(0).gameObject);
+			if (j > 4) break;
+		}
+
+		int index = buttons.IndexOf(button);
+		tempWeapon = Instantiate(buttonWeapons[index], parent.position, parent.rotation) as GameObject;
 		tempWeapon.transform.parent = parent;
 	}
 
