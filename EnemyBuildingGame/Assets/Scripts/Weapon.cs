@@ -5,8 +5,9 @@ public class Weapon : Part {
 	public int beatOffset = 0;
 	public int secondShotOffset = 2;
 	public int beatCount = 8;
-	
+	public ParticleSystem fireParticles;
 	private AudioSource audioSource;
+	public float recoil = 0;
 
 	protected virtual void Awake()
 	{
@@ -34,12 +35,34 @@ public class Weapon : Part {
 		if ((count + beatCount) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
 		else if ((count + beatCount + secondShotOffset) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
 	}
-
+	Rigidbody attachedRigidbody;
 	public virtual void Fire(double time)
 	{
 		if (audioSource != null)
 		{
 			audioSource.PlayScheduled(time);
+		}
+
+		if (fireParticles != null)
+		{
+			fireParticles.Play();
+		}
+
+		if (!Mathf.Approximately(recoil, 0))
+		{
+			if (attachedRigidbody == null)
+			{
+				Transform tr = transform.parent;
+				while (tr != null && attachedRigidbody == null)
+				{
+					attachedRigidbody = tr.rigidbody;
+					tr = tr.parent;
+				}
+			}
+			else
+			{
+				attachedRigidbody.AddRelativeForce(transform.forward * recoil);
+			}
 		}
 	}
 }
