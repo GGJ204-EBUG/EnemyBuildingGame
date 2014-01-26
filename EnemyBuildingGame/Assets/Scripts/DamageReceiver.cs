@@ -5,6 +5,7 @@ public class DamageReceiver : MonoBehaviour
 {
 	public float health;
 	public GameObject deathEffect;
+	public float shakeAmount = 0.1f;
 
 	public float Damage { get; private set; }
 
@@ -16,15 +17,16 @@ public class DamageReceiver : MonoBehaviour
 	public void TakeDamage(float amount)
 	{
 		if (EBG.CurrentState != EBG.GameState.Playing) return;
+
 		Damage += amount;
 		if (Damage >= health)
 		{
-			GameCamera.Shake(1);
+			GameCamera.Shake(shakeAmount);
 			Die();
 		}
 		else
 		{
-			GameCamera.Shake(amount / health);
+			GameCamera.Shake(shakeAmount * amount / health);
 		}
 	}
 
