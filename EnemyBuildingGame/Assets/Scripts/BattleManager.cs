@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class BattleManager : MonoBehaviour {
-	public GameObject robotPrefab;
-
 	public Transform player1Start;
 	public Transform player2Start;
 
@@ -13,13 +11,13 @@ public class BattleManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject go = GameObject.Instantiate(robotPrefab, player1Start.position, player1Start.rotation) as GameObject;
-		go.transform.parent = EBG.P1.transform;
-		EBG.P1.robot = go.GetComponent<Robot>();
+		EBG.P1.MakeRobot();
+		EBG.P2.MakeRobot();
 
-		go = GameObject.Instantiate(robotPrefab, player2Start.position, player2Start.rotation) as GameObject;
-		go.transform.parent = EBG.P2.transform;
-		EBG.P2.robot = go.GetComponent<Robot>();
+		EBG.P1.robot.transform.position = player1Start.position;
+		EBG.P1.robot.transform.rotation = player1Start.rotation;
+		EBG.P2.robot.transform.position = player2Start.position;
+		EBG.P2.robot.transform.rotation = player2Start.rotation;
 
 		EBG.CurrentState = EBG.GameState.Playing;
 

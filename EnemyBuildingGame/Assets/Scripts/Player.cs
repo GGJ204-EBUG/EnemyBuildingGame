@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 
 	public bool isPlayerOne = true;
 	public Robot robot;
+	
+	public Robot protoType;
 
 	bool isTouchPlatform;
 
@@ -28,6 +30,17 @@ public class Player : MonoBehaviour
 	}
 
 	private Vector2 input;
+
+	public void MakeRobot()
+	{
+		if (protoType == null) return;
+
+		if (robot != null) Destroy(robot.gameObject);
+
+		GameObject go = Instantiate(protoType.gameObject) as GameObject;
+		go.SetActive(true);
+		robot = go.GetComponent<Robot>();
+	}
 
 	void Update()
 	{

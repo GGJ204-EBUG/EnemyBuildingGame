@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlasmaBallFire : Part
+public class PlasmaBallFire : Weapon
 {
 	public float ammoDamage;
 	public float ammoSpeed;
@@ -10,33 +10,17 @@ public class PlasmaBallFire : Part
 
 	public Plasma ammoPrefab;
 	public Transform ammoSpawnPos;
-	public float coolDown = 0.25f;
-	private float lastFired;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
-	// Update is called once per frame
-	void Update () {
-		Fire ();
-	}
-	
-	public void Fire()
+	public override void Fire(double time)
 	{
-		if (Time.time > lastFired + coolDown)
-		{
-			GameObject go = Instantiate(ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation) as GameObject;
+		base.Fire(time);
 
+		GameObject go = Instantiate(ammoPrefab.gameObject, ammoSpawnPos.position, ammoSpawnPos.rotation) as GameObject;
 
+		Plasma bullet = go.GetComponent<Plasma>();
+		bullet.speed = ammoSpeed;
+		bullet.damage = ammoDamage;
+		bullet.lifetime = ammoLifeTime;
 
-			Plasma bullet = go.GetComponent<Plasma>();
-			bullet.speed = ammoSpeed;
-			bullet.damage = ammoDamage;
-			//bullet.timecreated = Time;
-			bullet.lifetime = ammoLifeTime;
-			lastFired = Time.time;
-		}
 	}
 }

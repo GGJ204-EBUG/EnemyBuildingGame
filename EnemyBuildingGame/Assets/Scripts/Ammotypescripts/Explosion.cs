@@ -33,7 +33,7 @@ public class Explosion : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter(Collider col) 
+	void OnTriggerStay(Collider col) 
 	{
 		
 		GameObject target;

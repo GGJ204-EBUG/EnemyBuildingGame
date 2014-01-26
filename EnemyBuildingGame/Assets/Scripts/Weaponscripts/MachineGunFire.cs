@@ -2,55 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MachineGunFire : Part
+public class MachineGunFire : Weapon
 {
 	public float ammoDamage;
 	public float ammoSpeed;
 
 	public Bullet ammoPrefab;
 	public Transform ammoSpawnPos;
-	public float coolDown = 0.25f;
+
 	private float lastFired;
 
-	public int beatOffset = 0;
-	public int secondShotOffset = 2;
-	public int beatCount = 8;
-
-	private AudioSource audioSource;
-
-	void Awake()
+	public override void Fire(double time)
 	{
-		audioSource = audio;
-
-		if (audioSource != null && transform.position.x < 0) 
-		{
-			beatOffset = 2;
-			audioSource.pitch = 1.2f;
-		}
-	}
-
-	void OnEnable()
-	{
-		MusicEventManager.OnBeat += OnBeat;
-	}
-
-	void OnDisable()
-	{
-		MusicEventManager.OnBeat -= OnBeat;
-	}
-
-	void OnBeat(int count, double time)
-	{
-		if ((count + beatCount) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
-		else if ((count + beatCount + secondShotOffset) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
-	}
-
-	public void Fire(double time)
-	{
-		if (audioSource != null)
-		{
-			audioSource.PlayScheduled(time);
-		}
+		base.Fire (time);
 
 		if (ammoPrefab != null)
 		{
@@ -60,7 +24,5 @@ public class MachineGunFire : Part
 			bullet.damage = ammoDamage;
 			lastFired = Time.time;	
 		}
-
-
 	}
 }

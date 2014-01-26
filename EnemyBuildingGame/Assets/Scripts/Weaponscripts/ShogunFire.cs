@@ -20,12 +20,6 @@ public class ShogunFire : Part
 	public float coolDown = 1.0f;
 	private float lastFired;
 
-	// Use this for initialization
-	void Start () {
-		//line = gameObject.GetComponent<LineRenderer>();
-
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		Fire ();
@@ -45,6 +39,7 @@ public class ShogunFire : Part
 				bullet.damage = ammoDamage;
 				bullet.lifetime = ammoActiveTime;
 				bullet.loc = ammoSpawnPos;
+				bullet.transform.parent = transform;
 
 				/*
 				float offset = Random.Range(-40.0f,40.0f);
