@@ -83,6 +83,7 @@ public class Player : MonoBehaviour
 	{
 		if (robot != null && !isTouchPlatform)
 		{
+			bool reverse = false;
 			if (isPlayerOne)
 			{
 				input.x = Input.GetAxis("Player Two Turn");
