@@ -8,6 +8,7 @@ public class Weapon : Part {
 	public ParticleSystem fireParticles;
 	private AudioSource audioSource;
 	public float recoil = 0;
+	Rigidbody attachedRigidbody;
 
 	protected virtual void Awake()
 	{
@@ -32,10 +33,13 @@ public class Weapon : Part {
 	
 	protected virtual void OnBeat(int count, double time)
 	{
-		if ((count + beatCount) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
-		else if ((count + beatCount + secondShotOffset) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
+		if (EBG.CurrentState != EBG.GameState.Playing) return;
+		if ((count + beatOffset) % beatCount == 0) Fire (time);
+		else if ((count + beatOffset + secondShotOffset) % beatCount == 0) Fire (time);
+		//if ((count + beatCount) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
+		//else if ((count + beatCount + secondShotOffset) % MusicEventManager.Instance.countTo == beatOffset) Fire(time);
 	}
-	Rigidbody attachedRigidbody;
+
 	public virtual void Fire(double time)
 	{
 		if (audioSource != null)

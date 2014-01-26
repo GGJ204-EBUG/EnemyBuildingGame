@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	
 	public Robot prototype;
 	public Robot protoTypePrefab;
+	public Color playerColor;
 
 	bool isTouchPlatform;
 
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour
 
 	public void SetProtoType(Robot proto)
 	{
-		if (prototype != null && prototype != proto) Destroy(prototype);
+		if (proto != null && prototype != null && prototype != proto) Destroy(prototype);
 
 		Debug.Log("SetProtoType");
 		SetPrototypeWeaponsEnabled(true);
@@ -102,7 +103,6 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-
 				robot.TurnTowards(Quaternion.LookRotation(new Vector3(input.x, 0, input.y)).eulerAngles.y);
 				if (reverse) robot.AccelerateTowards(-1);
 				else robot.AccelerateTowards(1);
