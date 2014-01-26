@@ -61,7 +61,7 @@ public class BattleManager : MonoBehaviour {
 				EndGame();
 			}
 		}
-		else if (EBG.CurrentState == EBG.GameState.MatchOver && Time.time > matchEndTime + 5)
+		else if (EBG.CurrentState == EBG.GameState.MatchOver && Time.time > matchEndTime + 6)
 		{
 			if (Input.anyKey) RestartGame();  
 		}
