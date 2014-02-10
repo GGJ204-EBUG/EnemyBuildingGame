@@ -21,7 +21,7 @@ public class BombThrow : Part {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Time.time>lastFired+coolDown) {
+		if(Time.time>lastFired+coolDown && EBG.CurrentState == EBG.GameState.Playing) {
 			Throw();
 			lastFired=Time.time;
 
