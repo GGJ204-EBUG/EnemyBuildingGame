@@ -21,9 +21,6 @@ public class MineThrow : Weapon {
 			go.rigidbody.AddRelativeForce(throwForce);
 			Mine bomb = go.GetComponent<Mine>();
 			bomb.fuseLength = fuse;
-			bomb.damage = expDamage;
-			bomb.damageradius = expRadius;
-			bomb.damageTime = expTime;
 		}
 			
 	}

@@ -35,8 +35,6 @@ public class BombThrow : Part {
 			Bomb bomb = go.GetComponent<Bomb>();
 			bomb.fuseLength = fuse;
 			bomb.damage = expDamage;
-			bomb.damageradius = expRadius;
-			bomb.damageTime = expTime;
 		}
 			
 	}

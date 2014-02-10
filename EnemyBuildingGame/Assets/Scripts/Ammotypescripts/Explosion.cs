@@ -19,6 +19,7 @@ public class Explosion : MonoBehaviour {
 		if (visualPrefab != null)
 		{
 			GameObject go = Instantiate(visualPrefab, transform.position, Quaternion.identity) as GameObject;
+			if (go.audio != null) go.audio.PlayScheduled(MusicEventManager.Instance.GetNext());
 			Destroy(go, 10);
 		}
 		targets = new List<GameObject>();
@@ -35,7 +36,6 @@ public class Explosion : MonoBehaviour {
 
 	void OnTriggerStay(Collider col) 
 	{
-		
 		GameObject target;
 		if (col.attachedRigidbody != null) 
 		{
@@ -50,9 +50,10 @@ public class Explosion : MonoBehaviour {
 		{
 			targets.Add(target);
 			float dist = (target.transform.position - transform.position).magnitude;
+			float invertedDistance = Mathf.Clamp01(1 - dist / radius);
 
 			Damage dam = new Damage();
-			dam.amount = damage * radius / (dist + 1);
+			dam.amount = damage * invertedDistance;
 			dam.source = this;
 			dam.targetCollider = col;
 			
