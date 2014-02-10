@@ -130,6 +130,8 @@ public class AudioManager : MonoBehaviour
 			QueuedSound qs = new QueuedSound();
 			qs.clip = clip;
 			qs.queueTime = Time.time;
+			qs.volume = volume;
+			qs.pitch = pitch;
 			queue.Enqueue(qs);
 		}
 	}

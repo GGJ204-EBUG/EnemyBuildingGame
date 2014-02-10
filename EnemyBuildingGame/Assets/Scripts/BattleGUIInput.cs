@@ -29,7 +29,7 @@ public class BattleGUIInput : MonoBehaviour
 		else if (!multiTouch || (Input.touchCount == 0 && Input.GetMouseButton(0)))
 		{
 			RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector3.forward);
-			if (hit != null && hit.collider != null)
+			if (hit.collider != null)
 			{
 				if (Input.GetMouseButtonUp(0))
 				{

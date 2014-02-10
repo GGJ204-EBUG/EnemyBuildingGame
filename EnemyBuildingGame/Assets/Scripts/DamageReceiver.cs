@@ -11,8 +11,6 @@ public class DamageReceiver : MonoBehaviour
 
 	public void TakeDamage(Damage newDamage)
 	{
-		Debug.Log(gameObject.name + " got " + newDamage.amount + " damage from " + newDamage.source.gameObject.name);
-
 		TakeDamage(newDamage.amount);
 	}
 

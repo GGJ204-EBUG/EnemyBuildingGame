@@ -9,14 +9,9 @@ public class RandomDrops : MonoBehaviour
 	public float areaRadius = 10;
 	public float startTime = 10;
 	public float height = 24;
-	// Use this for initialization
+
 	void Start () {
 		Invoke("Drop", startTime + Random.Range(minInterval, maxInterval)); 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	void Drop()
@@ -27,7 +22,7 @@ public class RandomDrops : MonoBehaviour
 			Random.Range(-areaRadius, areaRadius)
 			) + transform.position;
 
-		GameObject go = Instantiate(dropPrefab, pos, Quaternion.identity) as GameObject;
+		Instantiate(dropPrefab, pos, Quaternion.identity);
 
 		if (EBG.CurrentState == EBG.GameState.Playing)
 		{

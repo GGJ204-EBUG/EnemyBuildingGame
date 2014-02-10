@@ -9,9 +9,7 @@ public class MachineGunFire : Weapon
 
 	public Bullet ammoPrefab;
 	public Transform ammoSpawnPos;
-
-	private float lastFired;
-
+	
 	public override void Fire(double time)
 	{
 		base.Fire (time);
@@ -22,7 +20,6 @@ public class MachineGunFire : Weapon
 			Bullet bullet = go.GetComponent<Bullet>();
 			bullet.speed = ammoSpeed;
 			bullet.damage = ammoDamage;
-			lastFired = Time.time;	
 		}
 	}
 }
